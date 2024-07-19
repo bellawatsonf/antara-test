@@ -36,16 +36,18 @@ function App() {
         throw new Error("Network response was not ok");
       }
       const data = await response.json();
+      console.log(
+        data.sort((a, b) => a.name - b.name),
+        param,
+        "ini datanya"
+      );
       if (param === "ASC") {
-        const sortedRepos = data.sort(
-          (a, b) => b.stargazers_count - a.stargazers_count
-        );
+        const sortedRepos = data.sort((a, b) => a.name.localeCompare(b.name));
+
         setRepos(sortedRepos);
         setCurrentPage(page);
       } else {
-        const sortedRepos = data.sort(
-          (a, b) => a.stargazers_count - b.stargazers_count
-        );
+        const sortedRepos = data.sort((a, b) => b.name.localeCompare(a.name));
         setRepos(sortedRepos);
         setCurrentPage(page);
       }
@@ -126,7 +128,7 @@ function App() {
                   <SortAscendingOutlined
                     onClick={() => {
                       setSorting("ASC");
-                      fetchRepos(1, "ASC");
+                      fetchRepos(1, sortingData);
                     }}
                   />
                 ) : (
@@ -134,7 +136,7 @@ function App() {
                     onClick={() => {
                       setSorting("DESC");
 
-                      fetchRepos(1, "DESC");
+                      fetchRepos(1, sortingData);
                     }}
                   />
                 )}
