@@ -124,22 +124,24 @@ function App() {
                 <h2 className="text-xl font-semibold mb-4">Repository</h2>
               </div>
               <div className="flex justify-end w-[50%]">
-                {sortingData !== "ASC" ? (
-                  <SortAscendingOutlined
-                    onClick={() => {
-                      setSorting("ASC");
-                      fetchRepos(1, sortingData);
-                    }}
-                  />
-                ) : (
-                  <SortDescendingOutlined
-                    onClick={() => {
-                      setSorting("DESC");
+                {repos.length > 0 ? (
+                  sortingData !== "ASC" ? (
+                    <SortAscendingOutlined
+                      onClick={() => {
+                        setSorting("ASC");
+                        fetchRepos(1, sortingData);
+                      }}
+                    />
+                  ) : (
+                    <SortDescendingOutlined
+                      onClick={() => {
+                        setSorting("DESC");
 
-                      fetchRepos(1, sortingData);
-                    }}
-                  />
-                )}
+                        fetchRepos(1, sortingData);
+                      }}
+                    />
+                  )
+                ) : null}
               </div>
             </div>
 
